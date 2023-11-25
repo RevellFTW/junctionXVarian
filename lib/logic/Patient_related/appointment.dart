@@ -51,6 +51,12 @@ class Appt {
     patient.pastAppointments.add(this);
   }
 
+  Appt.Template(DateTime start, Duration duration) {
+    this.start = start;
+    this.duration = duration;
+    this.end = start.add(duration);
+  }
+
   Machine findMachine(Treatment treatment) {
     Machine idealChoice = Machine.Empty();
     for (int i = 0; i < treatment.machines.length; i++) {

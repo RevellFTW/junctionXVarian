@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 import 'appointment.dart';
 import 'treatment.dart';
 import '../Machine_related/conditions.dart';
@@ -7,7 +7,7 @@ class Patient {
   late String name = '';
   // ignore: non_constant_identifier_names
   late DateTime DoB; //date of birth
-  late Char gender; //M/F necessary for room booking
+  //late Char gender; //M/F necessary for room booking
   late Condition condition;
   late Treatment treatment; //class defined in folder
   late bool
