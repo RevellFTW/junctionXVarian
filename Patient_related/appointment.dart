@@ -3,6 +3,13 @@ import '../Machine_related/machine.dart';
 import 'patient.dart';
 import '../exec.dart';
 
+enum slots {
+  none,
+  morning,
+  daytime,
+  afterwork,
+}
+
 class Appointment {
   late DateTime start;
   late DateTime end;
@@ -35,6 +42,11 @@ class Appointment {
     this.machine = machine;
     machine.available = false;
     this.end = this.start.add(this.duration);
+  }
+
+  Appointment.Cancelled(Patient patient) {
+    this.cancelled = true;
+    patient.pastAppointments.add(this);
   }
 
   Machine findMachine(Treatment treatment) {
