@@ -193,3 +193,53 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget>
 class _MyAppDataSource extends CalendarDataSource {
   _MyAppDataSource({required List<Appointment> appointments}) : super();
 }
+
+void _onTap(CalendarTapDetails details) {
+  if (details.targetElement == CalendarElement.appointment) {
+    // Existing code...
+  } else if (details.targetElement == CalendarElement.calendarCell) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Register Event'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Start Time: ${details.date}'),
+              Text('End Time: ${details.date!.add(Duration(hours: 1))}'),
+              Text('Subject: Dummy Data'),
+              Text('Color: Blue'),
+              ElevatedButton(
+                onPressed: () {
+                  _addAppointment(
+                    details.date!,
+                    details.date!.add(Duration(hours: 1)),
+                    'Dummy Data',
+                    Colors.blue,
+                  );
+                  Navigator.of(context).pop();
+                },
+                child: Text('Add'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+void _addAppointment(
+    DateTime startTime, DateTime endTime, String subject, Color color) {
+  setState(() {
+    _model.dataSource.appointments!.add(
+      Appointment(
+        startTime: startTime,
+        endTime: endTime,
+        subject: subject,
+        color: color,
+      ),
+    );
+  });
+}
