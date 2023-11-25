@@ -1,9 +1,5 @@
 import 'Facility_related/deviceManagement.dart';
 
-var devMan= deviceManagement();
+var devMan = deviceManagement();
 
-void main()
-{
-   
-
-}
+void main() {}

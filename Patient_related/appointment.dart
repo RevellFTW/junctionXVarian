@@ -1,6 +1,7 @@
 import 'treatment.dart';
 import '../Machine_related/machine.dart';
 import 'patient.dart';
+import '../exec.dart';
 
 class Appointment {
   late DateTime start;
@@ -9,7 +10,8 @@ class Appointment {
   late Duration duration;
   late Machine machine;
   late Treatment treatment;
-  late bool cancelled;
+  late bool cancelled = false;
+  late bool slotBlocker = false;
 
   Appointment(Patient patient) {
     this.patient = patient;
@@ -19,9 +21,35 @@ class Appointment {
     this.end = this.start.add(this.duration);
   }
 
-  Machine findMachine(Treatment treatment) {
-    Machine idealChoice;
+  Appointment.Maint(Machine machine) {
+    this.slotBlocker = true;
+    this.machine = machine;
+    machine.available = false;
+    this.duration = Duration(days: 2);
+    this.end = this.start.add(this.duration);
+  }
 
+  Appointment.Repair(Machine machine) {
+    this.slotBlocker = true;
+    this.duration = machine.timeToFix;
+    this.machine = machine;
+    machine.available = false;
+    this.end = this.start.add(this.duration);
+  }
+
+  Machine findMachine(Treatment treatment) {
+    Machine idealChoice = Machine.Empty();
+    for (int i = 0; i < treatment.machines.length; i++) {
+      if (devMan.availableDevices
+          .any((element) => element == treatment.machines[i])) {
+        idealChoice = devMan.availableDevices
+            .firstWhere((element) => element == treatment.machines[i]);
+        i = treatment.machines.length;
+        devMan.availableDevices.remove(idealChoice);
+      } else {
+        idealChoice = Machine.Empty();
+      }
+    }
     return idealChoice;
   }
 
@@ -33,7 +61,7 @@ class Appointment {
 
   void registerTreatment(Appointment appointment) {
     if (DateTime.now() == appointment.end && !appointment.cancelled) {
-      appointment.patient.pastAppoinents.add(appointment);
+      appointment.patient.pastAppointments.add(appointment);
       appointment.patient.treatment.progress++;
       appointment.machine.usage += appointment.duration;
     }

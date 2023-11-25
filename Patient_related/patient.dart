@@ -2,6 +2,13 @@ import 'dart:ffi';
 import 'appointment.dart';
 import 'treatment.dart';
 
+enum slots {
+  none,
+  morning,
+  daytime,
+  afterwork,
+}
+
 class Patient {
   late String name = '';
   late DateTime DoB; //date of birth
@@ -12,7 +19,8 @@ class Patient {
   late bool inPatient; //is in the facility
   late bool largeBodied;
   late int priority;
-  late List<Appointment> pastAppoinents;
+  late List<Appointment> pastAppointments;
+  String preferredSlot = slots.none.toString();
 
   Patient() {}
 }

@@ -16,6 +16,8 @@ class Machine {
   Duration usage =
       Duration(minutes: 0); // use time recorded in minutes for statistics
 
+  Machine.Empty() {}
+
   Machine(String type, int instance) {
     this.type = type;
     switch (type) {
