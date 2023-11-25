@@ -1,23 +1,26 @@
+// ignore_for_file: file_names
+
 import '../Machine_related/machine.dart';
 import '../Patient_related/appointment.dart';
 
+// ignore: camel_case_types
 class deviceManagement {
   List<Machine> devices = [];
   List<Machine> availableDevices = [];
 
   deviceManagement() {
-    this.devices = initDevicePark();
-    this.availableDevices = devices;
+    devices = initDevicePark();
+    availableDevices = devices;
   }
 
   void plannedMachineMaintenance(Machine machine) {
     machine.inMaint = true;
-    var maintSlot = Appointment.Maint(machine);
+    var maintSlot = Appt.Maint(machine);
   }
 
   void machineRepair(Machine machine) {
     machine.isBroken = true;
-    var repairSlot = Appointment.Repair(machine);
+    var repairSlot = Appt.Repair(machine);
   }
 
   void machineMonitoring(Machine machine) {

@@ -1,16 +1,18 @@
+// ignore_for_file: prefer_initializing_formals, non_constant_identifier_names
+
 import 'treatment.dart';
 import '../Machine_related/machine.dart';
 import 'patient.dart';
 import '../exec.dart';
 
-enum slots {
+enum Slots {
   none,
   morning,
   daytime,
   afterwork,
 }
 
-class Appointment {
+class Appt {
   late DateTime start;
   late DateTime end;
   late Patient patient;
@@ -20,33 +22,39 @@ class Appointment {
   late bool cancelled = false;
   late bool slotBlocker = false;
 
-  Appointment(Patient patient) {
-    this.patient = patient;
-    this.duration = patient.treatment.duration;
-    this.treatment = patient.treatment;
-    this.machine = findMachine(this.treatment);
-    this.end = this.start.add(this.duration);
+  Appt(Patient patient) {
+    patient = patient;
+    duration = patient.treatment.duration;
+    treatment = patient.treatment;
+    machine = findMachine(treatment);
+    end = start.add(duration);
   }
 
-  Appointment.Maint(Machine machine) {
-    this.slotBlocker = true;
-    this.machine = machine;
+  Appt.Maint(Machine machine) {
+    slotBlocker = true;
+    machine = machine;
     machine.available = false;
-    this.duration = Duration(days: 2);
-    this.end = this.start.add(this.duration);
+    const duration = Duration(days: 2);
+    end = start.add(duration);
   }
 
-  Appointment.Repair(Machine machine) {
-    this.slotBlocker = true;
-    this.duration = machine.timeToFix;
-    this.machine = machine;
+  Appt.Repair(Machine machine) {
+    slotBlocker = true;
+    duration = machine.timeToFix;
+    machine = machine;
     machine.available = false;
-    this.end = this.start.add(this.duration);
+    end = start.add(duration);
   }
 
-  Appointment.Cancelled(Patient patient) {
-    this.cancelled = true;
+  Appt.Cancelled(Patient patient) {
+    cancelled = true;
     patient.pastAppointments.add(this);
+  }
+
+  Appt.Template(DateTime start, Duration duration) {
+    this.start = start;
+    this.duration = duration;
+    this.end = start.add(duration);
   }
 
   Machine findMachine(Treatment treatment) {
@@ -71,7 +79,7 @@ class Appointment {
 
   void createBooking() {}
 
-  void registerTreatment(Appointment appointment) {
+  void registerTreatment(Appt appointment) {
     if (DateTime.now() == appointment.end && !appointment.cancelled) {
       appointment.patient.pastAppointments.add(appointment);
       appointment.patient.treatment.progress++;
@@ -79,7 +87,7 @@ class Appointment {
     }
   }
 
-  void cancelAppointment(Appointment appointment) {
+  void cancelAppointment(Appt appointment) {
     appointment.cancelled = true;
   }
 }

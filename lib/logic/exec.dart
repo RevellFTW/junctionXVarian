@@ -1,4 +1,5 @@
-import './Facility_related/deviceManagement.dart';
+
+import '../logic/Facility_related/deviceManagement.dart';
 
 var devMan = deviceManagement();
 
