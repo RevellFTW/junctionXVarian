@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:varian_app/screens/homescreen.dart';
 
-import 'screens/assignpatient.dart';
 import 'logic/package.dart';
+import 'screens/assignpatient.dart';
 
 void main() {
   runApp(MyApp());
