@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:varian_app/screens/homescreen.dart';
 
+import 'screens/assignpatient.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -10,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomeScreenWidget(),
+      home: AssignPatientWidget(),
     );
   }
 
