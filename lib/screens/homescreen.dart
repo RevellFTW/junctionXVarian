@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -25,7 +27,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomeScreenModel());
+    _model = createModel(context as BuildContext, () => HomeScreenModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -188,58 +190,57 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget>
     ];
     return _MyAppDataSource(appointments: appointments);
   }
+//   void _onTap(CalendarTapDetails details) {
+//   if (details.targetElement == CalendarElement.appointment) {
+//     // Existing code...
+//   } else if (details.targetElement == CalendarElement.calendarCell) {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('Register Event'),
+//           content: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: <Widget>[
+//               Text('Start Time: ${details.date}'),
+//               Text('End Time: ${details.date!.add(Duration(hours: 1))}'),
+//               Text('Subject: Dummy Data'),
+//               Text('Color: Blue'),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   _addAppointment(
+//                     details.date!,
+//                     details.date!.add(Duration(hours: 1)),
+//                     'Dummy Data',
+//                     Colors.blue,
+//                   );
+//                   Navigator.of(context).pop();
+//                 },
+//                 child: Text('Add'),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
+// void _addAppointment(
+//     DateTime startTime, DateTime endTime, String subject, Color color) {
+//   setState(() {
+//     _model.dataSource.appointments!.add(
+//       Appointment(
+//         startTime: startTime,
+//         endTime: endTime,
+//         subject: subject,
+//         color: color,
+//       ),
+//     );
+//   });
+// }
 }
 
 class _MyAppDataSource extends CalendarDataSource {
   _MyAppDataSource({required List<Appointment> appointments}) : super();
-}
-
-void _onTap(CalendarTapDetails details) {
-  if (details.targetElement == CalendarElement.appointment) {
-    // Existing code...
-  } else if (details.targetElement == CalendarElement.calendarCell) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Register Event'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text('Start Time: ${details.date}'),
-              Text('End Time: ${details.date!.add(Duration(hours: 1))}'),
-              Text('Subject: Dummy Data'),
-              Text('Color: Blue'),
-              ElevatedButton(
-                onPressed: () {
-                  _addAppointment(
-                    details.date!,
-                    details.date!.add(Duration(hours: 1)),
-                    'Dummy Data',
-                    Colors.blue,
-                  );
-                  Navigator.of(context).pop();
-                },
-                child: Text('Add'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-void _addAppointment(
-    DateTime startTime, DateTime endTime, String subject, Color color) {
-  setState(() {
-    _model.dataSource.appointments!.add(
-      Appointment(
-        startTime: startTime,
-        endTime: endTime,
-        subject: subject,
-        color: color,
-      ),
-    );
-  });
 }
