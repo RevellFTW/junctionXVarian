@@ -6,17 +6,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../models/home_screen_model.dart';
-export '../models/home_screen_model.dart';
+import '../models/time_table_screen_model.dart';
+export '../models/time_table_screen_model.dart';
 
-class HomeScreenWidget extends StatefulWidget {
-  const HomeScreenWidget({Key? key}) : super(key: key);
+class TimeTableWidget extends StatefulWidget {
+  const TimeTableWidget({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
+  _TimeTableWidgetState createState() => _TimeTableWidgetState();
 }
 
-class _HomeScreenWidgetState extends State<HomeScreenWidget>
+class _TimeTableWidgetState extends State<TimeTableWidget>
     with TickerProviderStateMixin {
   late HomeScreenModel _model;
 
@@ -157,11 +157,62 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget>
           child: SfCalendar(
             view: CalendarView.week,
             dataSource: _getCalendarDataSource(),
+            onTap: _onTap,
             allowDragAndDrop: true,
           ),
         ),
       ),
     );
+  }
+
+  void _onTap(CalendarTapDetails details) {
+    if (details.targetElement == CalendarElement.appointment) {
+      // Existing code...
+    } else if (details.targetElement == CalendarElement.calendarCell) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Register Event'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text('Start Time: ${details.date}'),
+                Text('End Time: ${details.date!.add(Duration(hours: 1))}'),
+                Text('Subject: Dummy Data'),
+                Text('Color: Blue'),
+                ElevatedButton(
+                  onPressed: () {
+                    _addAppointment(
+                      details.date!,
+                      details.date!.add(Duration(hours: 1)),
+                      'Dummy Data',
+                      Colors.blue,
+                    );
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Add'),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  void _addAppointment(
+      DateTime startTime, DateTime endTime, String subject, Color color) {
+    setState(() {
+      _model.dataSource.appointments!.add(
+        Appointment(
+          startTime: startTime,
+          endTime: endTime,
+          subject: subject,
+          color: color,
+        ),
+      );
+    });
   }
 
   _MyAppDataSource _getCalendarDataSource() {

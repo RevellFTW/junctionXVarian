@@ -1,17 +1,11 @@
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '../screens/assignpatient.dart' show AssignPatientWidget;
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class AssignPatientsModel extends FlutterFlowModel<AssignPatientWidget> {
+import '/flutter_flow/flutter_flow_util.dart';
+import '../screens/time_table_screen.dart' show TimeTableWidget;
+import 'package:flutter/material.dart';
+import '.././main.dart';
+
+class HomeScreenModel extends FlutterFlowModel<TimeTableWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -23,6 +17,19 @@ class AssignPatientsModel extends FlutterFlowModel<AssignPatientWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
+
+  MyAppDataSource get dataSource {
+    final List<Appointment> appointments = <Appointment>[
+      Appointment(
+        startTime: DateTime.now(),
+        endTime: DateTime.now().add(Duration(hours: 1)),
+        subject: 'Patient 1',
+        color: Colors.blue,
+      ),
+      // Add more appointments here...
+    ];
+    return MyAppDataSource(appointments: appointments);
+  }
 
   void dispose() {
     unfocusNode.dispose();

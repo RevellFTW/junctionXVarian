@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:varian_app/screens/time_table_screen.dart';
 
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,26 +7,27 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../models/assign_patients_model.dart';
-export '../models/assign_patients_model.dart';
+import '../models/patient_list_model.dart';
+export '../models/patient_list_model.dart';
 
-class AssignPatientWidget extends StatefulWidget {
-  const AssignPatientWidget({Key? key}) : super(key: key);
+class PatientListWidget extends StatefulWidget {
+  const PatientListWidget({super.key});
 
   @override
-  _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
+  // ignore: library_private_types_in_public_api
+  _PatientListWidgetState createState() => _PatientListWidgetState();
 }
 
-class _HomeScreenWidgetState extends State<AssignPatientWidget>
+class _PatientListWidgetState extends State<PatientListWidget>
     with TickerProviderStateMixin {
-  late AssignPatientsModel _model;
+  late PatientListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AssignPatientsModel());
+    _model = createModel(context, () => PatientListModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -56,18 +58,6 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            context.pushNamed('null');
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          elevation: 8,
-          child: Icon(
-            Icons.add,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24,
-          ),
-        ),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100),
           child: AppBar(
@@ -317,7 +307,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('null');
+                                      Navigator.pushNamed(
+                                          context, '/timetable');
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -336,7 +327,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('null');
+                                            Navigator.pushNamed(
+                                                context, '/timetable');
                                           },
                                           child: Icon(
                                             Icons.keyboard_arrow_right_rounded,
@@ -446,7 +438,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('null');
+                                      Navigator.pushNamed(
+                                          context, '/timetable');
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -465,7 +458,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('null');
+                                            Navigator.pushNamed(
+                                                context, '/timetable');
                                           },
                                           child: Icon(
                                             Icons.keyboard_arrow_right_rounded,
@@ -575,7 +569,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('null');
+                                      Navigator.pushNamed(
+                                          context, '/timetable');
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -594,7 +589,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('null');
+                                            Navigator.pushNamed(
+                                                context, '/timetable');
                                           },
                                           child: Icon(
                                             Icons.keyboard_arrow_right_rounded,
@@ -704,7 +700,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('null');
+                                      Navigator.pushNamed(
+                                          context, '/timetable');
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -723,7 +720,8 @@ class _HomeScreenWidgetState extends State<AssignPatientWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            context.pushNamed('null');
+                                            Navigator.pushNamed(
+                                                context, '/timetable');
                                           },
                                           child: Icon(
                                             Icons.keyboard_arrow_right_rounded,

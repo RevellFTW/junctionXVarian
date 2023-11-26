@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '../screens/homescreen.dart' show HomeScreenWidget;
+import '../screens/patient_list.dart' show PatientListWidget;
 import 'package:flutter/material.dart';
 
-class HomeScreenModel extends FlutterFlowModel<HomeScreenWidget> {
+class PatientListModel extends FlutterFlowModel<PatientListWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
