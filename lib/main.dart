@@ -11,14 +11,16 @@ class CustomAppointmentDataSource extends CalendarDataSource {
   }
 }
 
-List<Appointment> getAppointmentsFromData(List<Appt> appointmentData) {
-  return appointmentData.map((data) {
-    return Appointment(
-      startTime: data.start,
-      endTime: data.end,
-    );
-  }).toList();
-}
+// List<Appointment> getAppointmentsFromData(List<Appt> appointmentData) {
+//   return appointmentData.map((data) {
+//     return Appointment(
+//       startTime: data.start,
+//       endTime: data.end,
+//       recurrenceRule:
+//           'FREQ=DAILY;INTERVAL=1;BYDAY=MO,Tu,WED,THU,FRI;UNTIL=20231205',
+//     );
+//   }).toList();
+// }
 
 List<Appt> getCustomAppointmentData() {
   return <Appt>[
@@ -52,6 +54,8 @@ List<Appointment> convertToAppointments(List<Appt> data) {
     return Appointment(
       startTime: item.start,
       endTime: item.end,
+      recurrenceRule:
+          'FREQ=DAILY;INTERVAL=1;BYDAY=MO,Tu,WED,THU,FRI;UNTIL=20231205',
     );
   }).toList();
 }
